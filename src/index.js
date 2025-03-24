@@ -11,7 +11,7 @@ import bookRoutes from './/routes/book.routes.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000; // provides default VALUE if first is FALSY(doesnt exist)
-
+const API_URL = process.env.API_URL
 
 
 // MiddleWare - CronJobs
