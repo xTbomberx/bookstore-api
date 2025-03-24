@@ -18,8 +18,10 @@ import http from 'http';
 
 // const job = new cron.CronJob('*/14 * * * *', function() {
 const job = new cron.CronJob('* * * * *', function() {
+    const url = `${process.env.API_URL}/here`
+    
     http
-        .get(process.env.API_URL, (res) => {
+        .get(url, (res) => {
             if(res.statusCode ===  200) console.log('GET REQUEST succesful')
             else console.log('GET REQUEST failed', res.statusCode);
         })
