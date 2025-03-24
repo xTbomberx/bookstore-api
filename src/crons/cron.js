@@ -17,7 +17,7 @@ import cron from 'cron';
 import http from 'http';
 
 // const job = new cron.CronJob('*/14 * * * *', function() {
-const job = new cron.CronJob('* * * * *', function() {
+const job = new cron.CronJob('*/14 * * * *', function() {
     const url = `${process.env.API_URL}/here`
     
     http
