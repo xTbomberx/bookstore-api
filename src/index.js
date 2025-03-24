@@ -30,7 +30,7 @@ app.use('/api/books', bookRoutes);
 
 
 const main = async() => {
-    app.listen(PORT, () => {console.log(`${API_URL}:${PORT}`)})
+    app.listen(PORT, () => {console.log(`${API_URL}`)})
     connectDB();
 }
 
