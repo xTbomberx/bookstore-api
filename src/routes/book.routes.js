@@ -9,14 +9,17 @@ const router = express.Router();
 router.post('/', protectRoute, async(req,res) => {
     try{
         const {title, caption, rating,image} = req.body;
-        const userId = req.user?._id
-        console.log(userId)
+        const userId = req.user?._id;
+
+        console.log(userId);
+    
         // Error Check 1 - USER login required
         if (!userId) {
-            return res.status(400).json({ message: 'User is required' });
-          }
+          return res.status(400).json({ message: 'User is required' });
+        }
+    
         
-        // Error Check 2 - All fields required
+        // Error Check - All fields required
         if (!image || !title || !caption || !rating) {
             return res.status(400).json({ message: "Please provide all fields" });
           }
@@ -31,7 +34,7 @@ router.post('/', protectRoute, async(req,res) => {
             caption,
             rating,
             image: imageUrl,
-            user: req.user_id,
+            user: req.user._id,
         })
 
         await newBook.save();
