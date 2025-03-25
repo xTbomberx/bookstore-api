@@ -9,7 +9,14 @@ const router = express.Router();
 router.post('/', protectRoute, async(req,res) => {
     try{
         const {title, caption, rating,image} = req.body;
-
+        const userId = req.user?._id
+        console.log(userId)
+        // Error Check 1 - USER login required
+        if (!userId) {
+            return res.status(400).json({ message: 'User is required' });
+          }
+        
+        // Error Check 2 - All fields required
         if (!image || !title || !caption || !rating) {
             return res.status(400).json({ message: "Please provide all fields" });
           }
@@ -30,8 +37,8 @@ router.post('/', protectRoute, async(req,res) => {
         await newBook.save();
 
         res.status(201).json(newBook)
-    } catch(e) {
-        console.log('Error Creating book', e);
+    } catch(error) {
+        console.log('Error Creating book: ', error);
         res.status(500).json({message: error.message})
         
     }
@@ -66,7 +73,7 @@ router.get('/', protectRoute, async(req,res) => {
 
     } catch(e) {
         console.error('Get books error: ', e.message)
-        res.status(500).json({message: 'Server Error'})
+        res.status(500).json({message: e.message})
     }
 })
 
@@ -78,7 +85,7 @@ router.get('/user', protectRoute, async(req, res) => {
         res.json(books)
     } catch(e) {
         console.error('DB error: ', e.message);
-        res.status(500).json({message: 'Server Error'})
+        res.status(500).json({message: e.meesage})
     }
 });
 
