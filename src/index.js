@@ -16,7 +16,9 @@ const API_URL = process.env.API_URL
 
 // MiddleWare - CronJobs
 job.start() 
-app.use(express.json())
+app.use(express.json({
+    limit: '2MB',
+  }));
 app.use(cors());
 
 app.get('/here', (req,res) => {
