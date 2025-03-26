@@ -56,7 +56,7 @@ router.get('/', protectRoute, async(req,res) => {
         console.log('received get book request')
         // queries = page & limit
         const page = req.query.page || 1; // Page = Returned ARRAY (blocks of limit(5))
-        const limit = req.query.limit || 5; // restricts the amount of books returned on the req
+        const limit = req.query.limit || 2; // restricts the amount of books returned on the req
         const skip = (page - 1)* limit; // skips # of docs based on the calculated skip value(page * limit)
 
         const books = await Book.find() // descending Order (newest(first) --> oldest)
