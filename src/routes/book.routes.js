@@ -53,7 +53,7 @@ router.get('/', protectRoute, async(req,res) => {
     // example call from react native - frontend
     // const response = await fetch("http://localhost:3000/api/books?page=1&limit=5");
     try {
-        
+        console.log('received get book request')
         // queries = page & limit
         const page = req.query.page || 1; // Page = Returned ARRAY (blocks of limit(5))
         const limit = req.query.limit || 5; // restricts the amount of books returned on the req
@@ -84,6 +84,7 @@ router.get('/', protectRoute, async(req,res) => {
 // get recommonded books by the logged in user - In profile page
 router.get('/user', protectRoute, async(req, res) => {
     try {
+        console.log('received get book request by a user')
         const books = await Book.find({ user: req.user._id}).sort({createdAt: -1})
         res.json(books)
     } catch(e) {
@@ -100,6 +101,7 @@ router.get('/user', protectRoute, async(req, res) => {
 // router delete - book.id
 router.delete('/:id', protectRoute, async(req,res) => {
     try{
+        console.log('received a delete request')
         const book = await Book.findById(req.params.id)
 
         // Check if Book exists
